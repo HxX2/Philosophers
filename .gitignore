@@ -1,0 +1,21 @@
+#-----------------------#
+#    Ignores Philo      #
+#-----------------------#
+
+# files without ext
+*
+!/**/
+!*.*
+
+# vscode
+.vscode
+README.md
+.DS_Store
+
+# make
+a.out
+*.o
+
+# c++ debuger
+*.dSYM
+ft*.out
