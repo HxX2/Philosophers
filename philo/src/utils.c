@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 07:05:18 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/01 07:03:13 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/08 11:17:16 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	throwerror(void)
 	exit(1);
 }
 
-unsigned long	get_time()
+clock_t	get_time()
 {
 	struct timeval time;
 
@@ -50,7 +50,7 @@ unsigned long	get_time()
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void	ft_usleep(unsigned long ms)
+void	ft_usleep(clock_t ms)
 {
 	unsigned long time1;
 	unsigned long time2;
