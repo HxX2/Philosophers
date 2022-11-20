@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 07:05:18 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/08 11:17:16 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/20 19:05:17 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_usleep(clock_t ms)
 	time2 = get_time();
 	while (time2 - time1 < ms)
 	{
-		usleep(10);
+		usleep(300);
 		time2 = get_time();
 	}
 }

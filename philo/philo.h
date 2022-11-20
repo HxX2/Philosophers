@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:13:44 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/08 11:13:49 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:29:51 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_ph
 	t_philo			*philos;	
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*t_span;
-	t_shared		sh;
+	t_shared		*sh;
 }		t_ph;
 
 int		ft_atoi(const char *str);

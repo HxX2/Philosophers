@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:31:20 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/08 13:13:23 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/20 19:16:08 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	init_philos(t_ph *ph)
 	while (i < ph->n_philos)
 	{
 		ph->philos[i].id = i + 1;
-		ph->philos[i].n_eat = ph->sh.n_eat;
-		ph->philos[i].sh = &ph->sh;
-		ph->philos[i].t_span = ph->sh.t_stamp;
+		ph->philos[i].n_eat = ph->sh->n_eat;
+		ph->philos[i].sh = ph->sh;
+		ph->philos[i].t_span = ph->sh->t_stamp;
 		ph->philos[i].l_fork = &ph->forks[i];
 		ph->philos[i].r_fork = &ph->forks[(i + 1) % ph->n_philos];
 		i++;
@@ -80,36 +80,37 @@ int	main(int ac, char **av)
 	memset(&ph, 0, sizeof(t_ph));
 	if (ac < 5)
 		return (0);
+	ph.sh = ft_calloc(sizeof(t_shared));
 	ph.n_philos = arg_validator(av, 1);
-	ph.sh.t_die = arg_validator(av, 2);
-	ph.sh.t_eat = arg_validator(av, 3);
-	ph.sh.t_sleep = arg_validator(av, 4);
+	ph.sh->t_die = arg_validator(av, 2);
+	ph.sh->t_eat = arg_validator(av, 3);
+	ph.sh->t_sleep = arg_validator(av, 4);
 	if (ac > 5)
-		ph.sh.n_eat = arg_validator(av, 5);
+		ph.sh->n_eat = arg_validator(av, 5);
 	else
-		ph.sh.n_eat = -1;
-	ph.sh.m_span = ft_calloc(sizeof(pthread_mutex_t));
-	ph.sh.m_msg = ft_calloc(sizeof(pthread_mutex_t));
-	ph.sh.m_eat = ft_calloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(ph.sh.m_eat, NULL);
-	pthread_mutex_init(ph.sh.m_span, NULL);
-	pthread_mutex_init(ph.sh.m_msg, NULL);
+		ph.sh->n_eat = -1;
+	ph.sh->m_span = ft_calloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(ph.sh->m_span, NULL);
+	ph.sh->m_msg = ft_calloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(ph.sh->m_msg, NULL);
+	ph.sh->m_eat = ft_calloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(ph.sh->m_eat, NULL);
 
 	init_forks(&ph);
 	init_philos(&ph);
 
 	i = 0;
-	ph.sh.t_stamp = get_time();
+	ph.sh->t_stamp = get_time();
 	while (i < ph.n_philos)
 	{
-		ph.philos[i].t_span = ph.sh.t_stamp;
+		ph.philos[i].t_span = ph.sh->t_stamp;
 		pthread_create(&ph.philos[i].thread_id, NULL, philo_routine, (void *)&ph.philos[i]);
 		i += 2;
 	}
 	i = 1;
 	while (i < ph.n_philos)
 	{
-		ph.philos[i].t_span = ph.sh.t_stamp;
+		ph.philos[i].t_span = ph.sh->t_stamp;
 		pthread_create(&ph.philos[i].thread_id, NULL, philo_routine, (void *)&ph.philos[i]);
 		i += 2;
 	}
@@ -119,18 +120,17 @@ int	main(int ac, char **av)
 		int ne = 0;
 		while (i < ph.n_philos)
 		{
-			pthread_mutex_lock(ph.sh.m_span);
+			pthread_mutex_lock(ph.sh->m_span);
 			clock_t time = get_time() - ph.philos[i % ph.n_philos].t_span;
-			pthread_mutex_unlock(ph.sh.m_span);
-			pthread_mutex_lock(ph.sh.m_eat);
+			pthread_mutex_unlock(ph.sh->m_span);
+			pthread_mutex_lock(ph.sh->m_eat);
 				ne += ph.philos[i % ph.n_philos].n_eat;
-			pthread_mutex_unlock(ph.sh.m_eat);
-			if (time > ph.sh.t_die)
+			pthread_mutex_unlock(ph.sh->m_eat);
+			if (time > ph.sh->t_die)
 			{
-				pthread_detach(ph.philos[i % ph.n_philos].thread_id);
-				pthread_mutex_lock(ph.sh.m_msg);
+				pthread_mutex_lock(ph.sh->m_msg);
 				printf("%lu %d died\n", time, ph.philos[i % ph.n_philos].id);
-				return (0);
+				return (1);
 			}
 			i++;
 		}
