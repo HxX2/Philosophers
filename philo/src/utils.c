@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 07:05:18 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/20 19:05:17 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/21 23:37:55 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	throwerror(void)
 	exit(1);
 }
 
-clock_t	get_time()
+clock_t	get_time(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
@@ -52,8 +52,8 @@ clock_t	get_time()
 
 void	ft_usleep(clock_t ms)
 {
-	unsigned long time1;
-	unsigned long time2;
+	clock_t	time1;
+	clock_t	time2;
 
 	time1 = get_time();
 	time2 = get_time();
@@ -66,7 +66,7 @@ void	ft_usleep(clock_t ms)
 
 void	*ft_calloc(size_t n)
 {
-	void		*ptr;
+	void	*ptr;
 
 	ptr = malloc(n);
 	if (!ptr)
@@ -74,11 +74,4 @@ void	*ft_calloc(size_t n)
 	while (n)
 		((unsigned char *)ptr)[--n] = 0;
 	return (ptr);
-}
-
-void	msg(unsigned long ts, int id, char *msg, pthread_mutex_t *mutex)
-{
-	pthread_mutex_lock(mutex);
-	printf("%lu %d %s\n", ts, id, msg);
-	pthread_mutex_unlock(mutex);
 }

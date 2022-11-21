@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:13:44 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/18 14:29:51 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/21 23:28:56 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,13 @@ void	throwerror(void);
 clock_t	get_time(void);
 void	msg(clock_t ts, int id, char *msg, pthread_mutex_t *mutex);
 
+void	init_forks(t_ph *ph);
+void	init_philos(t_ph *ph);
+void	create_threads(t_ph *ph);
+short	is_dead(clock_t time, t_ph *ph, int i);
+short	supervisor(t_ph *ph);
+void	take_forks(t_philo *philo);
+void	eat(t_philo *philo);
+void	*philo_routine(void *targ);
 
 #endif
