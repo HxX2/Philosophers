@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 07:05:18 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/25 00:29:50 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/24 00:23:44 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	ft_atoi(const char *str)
 	return (res * s);
 }
 
-int	throwerror(void)
+void	throwerror(void)
 {
 	write(1, "\033[0;31m\033[1mError\033[0;0m\n", 24);
-	return (-1);
+	exit (1);
 }
 
 clock_t	get_time(void)

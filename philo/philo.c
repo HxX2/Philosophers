@@ -6,46 +6,34 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:31:20 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/22 19:19:13 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 00:12:50 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_forks(t_ph *ph)
+int	init_args(t_ph *ph, char **av, int ac)
 {
-	int	i;
-
-	ph->forks = ft_calloc(sizeof(pthread_mutex_t) * ph->n_philos);
-	if (!ph->forks)
+	ph->n_philos = arg_validator(av, 1);
+	if (ph->n_philos == -1)
 		return (1);
-	i = 0;
-	while (i < ph->n_philos)
-	{
-		pthread_mutex_init(&ph->forks[i], NULL);
-		i++;
-	}
-	return (0);
-}
-
-int	init_philos(t_ph *ph)
-{
-	int	i;
-
-	i = 0;
-	ph->philos = ft_calloc(sizeof(t_philo) * ph->n_philos);
-	if (!ph->philos)
+	ph->sh->t_die = arg_validator(av, 2);
+	if (ph->sh->t_die == (clock_t)-1)
 		return (1);
-	while (i < ph->n_philos)
+	ph->sh->t_eat = arg_validator(av, 3);
+	if (ph->n_philos == -1)
+		return (1);
+	ph->sh->t_sleep = arg_validator(av, 4);
+	if (ph->n_philos == -1)
+		return (1);
+	if (ac > 5)
 	{
-		ph->philos[i].id = i + 1;
-		ph->philos[i].n_eat = ph->sh->n_eat;
-		ph->philos[i].sh = ph->sh;
-		ph->philos[i].t_span = ph->sh->t_stamp;
-		ph->philos[i].l_fork = &ph->forks[i];
-		ph->philos[i].r_fork = &ph->forks[(i + 1) % ph->n_philos];
-		i++;
+		ph->sh->n_eat = arg_validator(av, 5);
+		if (ph->n_philos == -1)
+			return (1);
 	}
+	else
+		ph->sh->n_eat = -1;
 	return (0);
 }
 
@@ -54,14 +42,8 @@ int	init_data(t_ph *ph, int ac, char **av)
 	ph->sh = ft_calloc(sizeof(t_shared));
 	if (!ph->sh)
 		return (1);
-	ph->n_philos = arg_validator(av, 1);
-	ph->sh->t_die = arg_validator(av, 2);
-	ph->sh->t_eat = arg_validator(av, 3);
-	ph->sh->t_sleep = arg_validator(av, 4);
-	if (ac > 5)
-		ph->sh->n_eat = arg_validator(av, 5);
-	else
-		ph->sh->n_eat = -1;
+	if (init_args(ph, av, ac))
+		return (1);
 	ph->sh->m_span = ft_calloc(sizeof(pthread_mutex_t));
 	if (!ph->sh->m_span)
 		return (1);
