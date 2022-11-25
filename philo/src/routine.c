@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 23:00:49 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/22 19:28:07 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 01:31:42 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->r_fork);
-	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a r fork",
+	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a fork",
 		philo->sh->m_msg);
-	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a l fork",
+	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a fork",
 		philo->sh->m_msg);
 }
 

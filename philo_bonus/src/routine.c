@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 23:00:49 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/25 00:51:20 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 01:31:50 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	take_forks(t_philo *philo)
 {
 	sem_wait(philo->forks);
 	sem_wait(philo->forks);
-	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a r fork",
+	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a fork",
 		philo->sh->m_msg);
-	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a l fork",
+	msg(get_time() - philo->sh->t_stamp, philo->id, "has taken a fork",
 		philo->sh->m_msg);
 }
 

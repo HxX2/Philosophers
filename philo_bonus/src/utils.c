@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 07:05:18 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/24 00:23:44 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 02:20:23 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + (str[i] - 48);
+		if (res > 2147483647 && s == 1)
+			throwerror();
 		i++;
 	}
 	return (res * s);

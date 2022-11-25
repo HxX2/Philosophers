@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:31:20 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/25 00:12:50 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 02:19:01 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 int	init_args(t_ph *ph, char **av, int ac)
 {
 	ph->n_philos = arg_validator(av, 1);
-	if (ph->n_philos == -1)
+	if (ph->n_philos == 0)
 		return (1);
 	ph->sh->t_die = arg_validator(av, 2);
-	if (ph->sh->t_die == (clock_t)-1)
+	if (ph->sh->t_die == 0)
 		return (1);
 	ph->sh->t_eat = arg_validator(av, 3);
-	if (ph->n_philos == -1)
+	if (ph->sh->t_eat == 0)
 		return (1);
 	ph->sh->t_sleep = arg_validator(av, 4);
-	if (ph->n_philos == -1)
+	if (ph->sh->t_sleep == 0)
 		return (1);
 	if (ac > 5)
 	{
 		ph->sh->n_eat = arg_validator(av, 5);
-		if (ph->n_philos == -1)
+		if (ph->sh->n_eat == 0)
 			return (1);
 	}
 	else
