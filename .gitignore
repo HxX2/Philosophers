@@ -19,3 +19,6 @@ a.out
 # c++ debuger
 *.dSYM
 ft*.out
+
+# do not ignore
+!Makefile
