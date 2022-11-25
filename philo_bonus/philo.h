@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:13:44 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/24 23:25:24 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 00:39:58 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				n_eat;
-	clock_t			t_span;
+	struct timeval	t_span;
 	pthread_t		thread_id;
 	sem_t			*forks;
 	t_shared		*sh;

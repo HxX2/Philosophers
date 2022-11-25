@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:31:20 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/24 05:27:56 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 00:47:08 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	init_philos(t_ph *ph)
 		ph->philos[i].id = i + 1;
 		ph->philos[i].n_eat = ph->sh->n_eat;
 		ph->philos[i].sh = ph->sh;
-		ph->philos[i].t_span = ph->sh->t_stamp;
 		ph->philos[i].forks = ph->forks;
 		i++;
 	}

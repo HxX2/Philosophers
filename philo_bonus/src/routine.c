@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 23:00:49 by zlafou            #+#    #+#             */
-/*   Updated: 2022/11/24 23:22:29 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/11/25 00:51:20 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ void	*philo_routine(void *targ)
 	{
 		take_forks(philo);
 		eat(philo);
-		philo->t_span = get_time();
+		gettimeofday(&philo->t_span, NULL);
 		ft_usleep(philo->sh->t_eat);
 		sem_post(philo->forks);
 		sem_post(philo->forks);
 		sem_wait(philo->sh->m_eat);
+		printf("");
 		if (philo->n_eat)
 			philo->n_eat--;
+		printf("");
 		sem_post(philo->sh->m_eat);
 		msg(get_time() - philo->sh->t_stamp, philo->id, "is sleeping",
 			philo->sh->m_msg);
